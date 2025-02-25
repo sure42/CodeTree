@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 from torch.nn.modules.utils import _single
 
-
 class ConvTBC(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, padding=0, remove_future=False):
         super(ConvTBC, self).__init__()

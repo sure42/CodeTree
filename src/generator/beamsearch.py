@@ -14,10 +14,10 @@ sys.path.append(GPT_CONUT_TRAINER_DIR + '../dataloader/')
 device = torch.device('cpu')
 # sys.path.append(BEAM_SEARCH_DIR + '../models/')
 sys.path.append(BEAM_SEARCH_DIR + '../models/')
-from gpt_conut import GPTCoNuTModel
-from gpt_fconv import GPTFConvModel
-from gpt_detector import GPTDetector
-from dictionary import Dictionary
+# from gpt_conut import GPTCoNuTModel
+# from gpt_fconv import GPTFConvModel
+# from gpt_detector import GPTDetector
+# from dictionary import Dictionary
 
 
 def get_statement_length(seq):

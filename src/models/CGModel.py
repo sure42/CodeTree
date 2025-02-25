@@ -5,7 +5,7 @@ import torch.nn.functional as F
 
 from transformers import T5EncoderModel, T5ForConditionalGeneration
 
-from conv_tbc import ConvTBC
+from .conv_tbc import ConvTBC
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 def find_subsequence_indices(src, src_with_prev):
@@ -106,8 +106,10 @@ class CGModel(nn.Module):
             loss_fct = nn.NLLLoss()# 损失函数
             
             shift_logits = logits[..., :-1, :].contiguous() # 1 x 26 x 32100 这里对应 prev_tokens_index
+            print(shift_logits.size())
             # filtered_src = labels['input_ids'][i][1:labels['input_ids'][i].nonzero()[:, 0].max()+1] # 排除首尾的标识
             shift_labels = labels['input_ids'][..., :].contiguous() # 1 x 27 这里应该是 1 x 26    这里可能跟前后的标识有关系？在对应一下CURE的内容
+            print(shift_labels.size())
             loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1))
             
             shift_lm_logits = lm_logits[..., :-2, :].contiguous() # 这里的 -2 和下面的 1:-1 没有理解为什么
